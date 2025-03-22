@@ -5,7 +5,7 @@ from pathlib import Path
 
 import typer
 
-from opencoder.app_meta import app_name
+from opencodr.app_meta import app_name
 
 DOCKER_TMPL = """
 FROM {app_name}/base
@@ -13,7 +13,7 @@ FROM {app_name}/base
 WORKDIR /workspace
 
 COPY .git /workspace/.git
-COPY .opencoder /workspace/.opencoder
+COPY .opencodr /workspace/.opencodr
 
 RUN git worktree add readonly
 RUN git worktree add dev

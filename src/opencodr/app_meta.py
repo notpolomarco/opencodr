@@ -1,6 +1,6 @@
 from pathlib import Path
 
-app_name = "opencoder"
+app_name = "opencodr"
 
 
 def get_opencoder_dir() -> Path | None:

@@ -6,10 +6,10 @@ from litellm import Choices, Message, ModelResponse
 from unittest.mock import AsyncMock, MagicMock, patch
 
 from mcp import Tool
-from opencoder.agent import Agent
-from opencoder.config import OpenCoderConfig
-from opencoder.mcp_client import Server
-from opencoder.types import ToolCallError
+from opencodr.agent import Agent
+from opencodr.config import OpenCoderConfig
+from opencodr.mcp_client import Server
+from opencodr.types import ToolCallError
 from mcp.types import TextContent
 
 
@@ -21,13 +21,13 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         self.mock_tool = MagicMock(spec=Tool)
 
         self.patcher = patch(
-            "opencoder.agent.supports_function_calling", return_value=True
+            "opencodr.agent.supports_function_calling", return_value=True
         )
         self.mock_supports_function_calling = self.patcher.start()
         self.addCleanup(self.patcher.stop)
 
         self.get_opencoder_dir_patcher = patch(
-            "opencoder.agent.get_opencoder_dir", return_value=None
+            "opencodr.agent.get_opencoder_dir", return_value=None
         )
         self.mock_get_opencoder_dir = self.get_opencoder_dir_patcher.start()
         self.addCleanup(self.get_opencoder_dir_patcher.stop)
@@ -264,7 +264,7 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(error_result["content"], "Error: Tool execution failed")
 
     @pytest.mark.asyncio
-    @patch("opencoder.agent.console.print")
+    @patch("opencodr.agent.console.print")
     async def test_check_circuit_breakers_all_fine(self, mock_print):
         agent = Agent(conf=self.mock_config)
         agent.curr_depth = 1
@@ -278,7 +278,7 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         mock_print.assert_not_called()
 
     @pytest.mark.asyncio
-    @patch("opencoder.agent.console.print")
+    @patch("opencodr.agent.console.print")
     @patch.object(Agent, "check_circuit_breakers", return_value=False)
     @patch.object(Agent, "handle_user_input")
     @patch.object(Agent, "handle_stream_completion")
@@ -295,8 +295,8 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         assert result is None
 
     @pytest.mark.asyncio
-    @patch("opencoder.agent.Agent.check_circuit_breakers")
-    @patch("opencoder.agent.Agent.handle_stream_completion", new_callable=AsyncMock)
+    @patch("opencodr.agent.Agent.check_circuit_breakers")
+    @patch("opencodr.agent.Agent.handle_stream_completion", new_callable=AsyncMock)
     @patch("builtins.input", side_effect=["quit", "EOF"])
     async def test_generate_with_prompt(
         self, mock_input, mock_handle_stream, mock_check
@@ -328,8 +328,8 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         assert mock_input.call_count == 2
 
     @pytest.mark.asyncio
-    @patch("opencoder.agent.Agent.check_circuit_breakers")
-    @patch("opencoder.agent.Agent.handle_stream_completion", new_callable=AsyncMock)
+    @patch("opencodr.agent.Agent.check_circuit_breakers")
+    @patch("opencodr.agent.Agent.handle_stream_completion", new_callable=AsyncMock)
     @patch("builtins.input", side_effect=["Test prompt", "EOF", "quit", "EOF"])
     async def test_generate_with_user_input(
         self, mock_input, mock_handle_stream, mock_check
@@ -361,14 +361,14 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         assert agent.messages[1].content == "Test prompt"
         assert mock_input.call_count == 4
 
-    @patch("opencoder.agent.multiline_prompt", return_value="Hello, Agent!")
+    @patch("opencodr.agent.multiline_prompt", return_value="Hello, Agent!")
     async def test_handle_user_input_normal(self, mock_prompt):
         agent = Agent(conf=OpenCoderConfig(OC_MODEL="openai/gpt-4o"))
         result = await agent.handle_user_input()
         self.assertEqual(result, "Hello, Agent!")
         mock_prompt.assert_called()
 
-    @patch("opencoder.agent.multiline_prompt", return_value="quit")
+    @patch("opencodr.agent.multiline_prompt", return_value="quit")
     @patch("sys.stdout.write")
     async def test_handle_user_input_quit(self, mock_stdout, mock_prompt):
         agent = Agent(conf=OpenCoderConfig(OC_MODEL="openai/gpt-4o"))
@@ -377,8 +377,8 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         mock_stdout.assert_called()
         mock_prompt.assert_called()
 
-    @patch("opencoder.agent.multiline_prompt", return_value="e-2")
-    @patch("opencoder.agent.Agent.handle_rewind", new_callable=AsyncMock)
+    @patch("opencodr.agent.multiline_prompt", return_value="e-2")
+    @patch("opencodr.agent.Agent.handle_rewind", new_callable=AsyncMock)
     async def test_handle_user_input_rewind_edit(self, mock_rewind, mock_prompt):
         agent = Agent(conf=OpenCoderConfig(OC_MODEL="openai/gpt-4o"))
         result = await agent.handle_user_input()
@@ -386,8 +386,8 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         mock_rewind.assert_awaited_once_with(2, edit=True)
         mock_prompt.assert_called()
 
-    @patch("opencoder.agent.multiline_prompt", return_value="-1")
-    @patch("opencoder.agent.Agent.handle_rewind", new_callable=AsyncMock)
+    @patch("opencodr.agent.multiline_prompt", return_value="-1")
+    @patch("opencodr.agent.Agent.handle_rewind", new_callable=AsyncMock)
     async def test_handle_user_input_rewind_no_edit(self, mock_rewind, mock_prompt):
         agent = Agent(conf=OpenCoderConfig(OC_MODEL="openai/gpt-4o"))
         result = await agent.handle_user_input()
@@ -395,7 +395,7 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         mock_rewind.assert_awaited_once_with(1, edit=False)
         mock_prompt.assert_called()
 
-    @patch("opencoder.agent.multiline_prompt", return_value="")
+    @patch("opencodr.agent.multiline_prompt", return_value="")
     async def test_handle_user_input_empty(self, mock_prompt):
         agent = Agent(conf=OpenCoderConfig(OC_MODEL="openai/gpt-4o"))
         result = await agent.handle_user_input()
@@ -425,9 +425,9 @@ class TestAgent(unittest.IsolatedAsyncioTestCase):
         assert mock_input.call_count == 2
 
     @pytest.mark.asyncio
-    @patch("opencoder.agent.edit_msg", side_effect=lambda text: "Edited " + text)
+    @patch("opencodr.agent.edit_msg", side_effect=lambda text: "Edited " + text)
     @patch("builtins.input", side_effect=["quit", "EOF"])
-    @patch("opencoder.agent.Agent.handle_stream_completion", new_callable=AsyncMock)
+    @patch("opencodr.agent.Agent.handle_stream_completion", new_callable=AsyncMock)
     async def test_rewind_with_edit(
         self,
         mock_handle_stream,

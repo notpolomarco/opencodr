@@ -5,11 +5,11 @@ from pathlib import Path
 import debugpy  # type: ignore
 import typer
 
-from opencoder.agent import Agent
-from opencoder.app_meta import app_name, get_opencoder_dir
-from opencoder.config import MCPServersConfig, OpenCoderConfig
-from opencoder.mcp_client import Server
-from opencoder.workspace import Workspace
+from opencodr.agent import Agent
+from opencodr.app_meta import app_name, get_opencoder_dir
+from opencodr.config import MCPServersConfig, OpenCoderConfig
+from opencodr.mcp_client import Server
+from opencodr.workspace import Workspace
 
 if os.getenv("DEBUG") == "1":
     print("Waiting for debugger attach")
@@ -70,7 +70,7 @@ def main():
     project_dir = get_opencoder_dir()
 
     if project_dir is None and (len(sys.argv) < 2 or sys.argv[1] != "init"):
-        return typer.echo("✋ opencoder project not initialized. Run `opencoder init`")
+        return typer.echo("✋ opencodr project not initialized. Run `opencodr init`")
 
     if project_dir is None and (len(sys.argv) == 2 and sys.argv[1] == "init"):
         return init()
