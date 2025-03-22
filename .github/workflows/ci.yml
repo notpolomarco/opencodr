@@ -37,7 +37,7 @@ jobs:
       - name: Run tests
         run: |
           # Ensure opencoder is in the PYTHONPATH
-          export PYTHONPATH=$(pwd)/opencoder
+          export PYTHONPATH=$(pwd)/src
           uv run pytest --cov=opencoder
 
       - name: Lint with ruff
