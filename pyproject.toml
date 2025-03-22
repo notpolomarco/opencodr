@@ -89,7 +89,6 @@ dev = [
 
 [project.scripts]
 opencodr = "opencodr.main:main"
-opencodr-server = "opencodr.mcp_server:main"
 
 
 [build-system]
