@@ -348,7 +348,7 @@ class Agent:
             not hasattr(response.choices[0], "message")
             or not response.choices[0].message.tool_calls
         ):
-            return
+            return []
 
         message = response.choices[0].message
         tool_calls = message.tool_calls or []
