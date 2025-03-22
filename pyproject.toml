@@ -1,6 +1,6 @@
 [project]
 name = "opencodr"
-version = "0.1.7"
+version = "0.1.8"
 description = "open source terminal-based coding agent"
 readme = "README.md"
 authors = [
