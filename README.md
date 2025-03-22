@@ -132,7 +132,7 @@ Run the following command from the **root** of your project:
 export OC_PATH="$(pwd)"
 
 # <provider>/<model_name>
-export OC_MODEL="openai/gpt-4o"
+export OC_MODEL="openrouter/openai/gpt-4o"
 
 # export OC_BASE_URL=""
 # export OC_MAX_TOKENS=""
