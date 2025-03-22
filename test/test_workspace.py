@@ -5,15 +5,15 @@ from unittest.mock import MagicMock, patch
 
 import typer
 
-from opencoder.app_meta import app_name
-from opencoder.workspace import Workspace
+from opencodr.app_meta import app_name
+from opencodr.workspace import Workspace
 
 
 class TestWorkspace(unittest.TestCase):
     def setUp(self):
         self.workspace = Workspace()
-        self.test_image_name = "opencoder/test"
-        self.test_dockerfile_path = Path("/test/Dockerfile.opencoder")
+        self.test_image_name = "opencodr/test"
+        self.test_dockerfile_path = Path("/test/Dockerfile.opencodr")
 
     @patch("shutil.which")
     def test_check_docker_exists_success(self, mock_which):
@@ -264,7 +264,7 @@ class TestWorkspace(unittest.TestCase):
         self.workspace.start_workspace()
 
         mock_check_docker.assert_called_once()
-        mock_check_image.assert_called_once_with("opencoder/base")
+        mock_check_image.assert_called_once_with("opencodr/base")
         mock_build_image.assert_called_once_with(
             self.test_dockerfile_path, self.test_image_name
         )

@@ -16,8 +16,8 @@ from rich.spinner import Spinner
 from rich.text import Text
 from rich.tree import Tree
 
-from opencoder.console import console
-from opencoder.types import ToolCallError
+from opencodr.console import console
+from opencodr.types import ToolCallError
 
 rewind_cmd_rgx = r"^(e-|\-)(\d+)$"
 

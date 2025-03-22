@@ -8,7 +8,7 @@ from mcp import ClientSession, ServerCapabilities, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from mcp.types import CallToolResult, Tool
 
-from opencoder.config import MCPServerConfig
+from opencodr.config import MCPServerConfig
 
 
 class Server:
@@ -24,7 +24,9 @@ class Server:
 
     async def initialize(self, sampling_callback=None) -> None:
         """Initialize the server connection."""
-        command = shutil.which("npx") or self.config.command
+        command = (
+            shutil.which("npx") if self.config.command == "npx" else self.config.command
+        )
 
         if not command:
             raise ValueError("Command not found, and no fallback provided.")

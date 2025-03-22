@@ -88,9 +88,9 @@ API Key(s) + A Terminal Is All You Need™️
 ```
 
 ```
-> MacBookPro:example user$ opencoder init opencoder --help
+> MacBookPro:example user$ opencodr init opencodr --help
 
-✋ opencoder project not initialized. Run `opencoder init`
+✋ opencodr project not initialized. Run `opencodr init`
 ```
 
 ### Initialization
@@ -98,16 +98,16 @@ API Key(s) + A Terminal Is All You Need™️
 Run the following command from the **root** of your project:
 
 ```
-> MacBookPro:example user$ opencoder init
+> MacBookPro:example user$ opencodr init
 
-📄 .rc file generated at /workspace/example/.opencoder/.rc
-✔️ .opencoder added to .gitignore
+📄 .rc file generated at /workspace/example/.opencodr/.rc
+✔️ .opencodr added to .gitignore
 ```
 
 ```
-> MacBookPro:example user$ opencoder --help
+> MacBookPro:example user$ opencodr --help
 
- Usage: opencoder [OPTIONS] COMMAND [ARGS]...
+ Usage: opencodr [OPTIONS] COMMAND [ARGS]...
 
 ╭─ Options ────────────────────────────────────────────────────╮
 │ --install-completion          Install completion for the     │
@@ -125,7 +125,7 @@ Run the following command from the **root** of your project:
 
 ### Configuration
 
-`/workspace/example/.opencoder/.rc`
+`/workspace/example/.opencodr/.rc`
 
 ```bash
 # List of allowed directories, Separated with colons (:) e.g "/path/to/a/dir:/path/to/b/dir"
@@ -146,7 +146,7 @@ export OPENROUTER_API_KEY=""
 
 > **_NOTE:_** See [https://docs.litellm.ai/docs/providers](https://docs.litellm.ai/docs/providers) for the list of supported models
 
-`/workspace/example/.opencoder/mcp.json` _(Optional)_
+`/workspace/example/.opencodr/mcp.json` _(Optional)_
 
 ```json
 {
@@ -163,9 +163,9 @@ export OPENROUTER_API_KEY=""
 
 Prompt Overrides _(Optional)_
 
-`/workspace/example/.opencoder/SYSTEM.txt`
+`/workspace/example/.opencodr/SYSTEM.txt`
 
-`/workspace/example/.opencoder/REPROMPT.txt`
+`/workspace/example/.opencodr/REPROMPT.txt`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -174,9 +174,9 @@ Prompt Overrides _(Optional)_
 ### generate
 
 ```
-> MacBookPro:example user$ opencoder gen --help
+> MacBookPro:example user$ opencodr gen --help
 
- Usage: opencoder gen [OPTIONS]
+ Usage: opencodr gen [OPTIONS]
 
 ╭─ Options ────────────────────────────────────────────────────╮
 │ --f           TEXT  Load prompt from file [default: None]    │
@@ -189,9 +189,9 @@ Prompt Overrides _(Optional)_
 > **_NOTE:_** Requires Docker
 
 ```
-> MacBookPro:example user$ opencoder workspace --help
+> MacBookPro:example user$ opencodr workspace --help
 
- Usage: opencoder workspace [OPTIONS] COMMAND [ARGS]...
+ Usage: opencodr workspace [OPTIONS] COMMAND [ARGS]...
 
 ╭─ Options ────────────────────────────────────────────────────╮
 │ --help          Show this message and exit.                  │

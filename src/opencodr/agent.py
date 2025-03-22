@@ -26,11 +26,11 @@ from rich.spinner import Spinner
 from rich.text import Text
 from typing_extensions import Annotated
 
-from opencoder.app_meta import get_opencoder_dir
-from opencoder.async_typer import AsyncTyper
-from opencoder.config import OpenCoderConfig
-from opencoder.console import console
-from opencoder.display import (
+from opencodr.app_meta import get_opencoder_dir
+from opencodr.async_typer import AsyncTyper
+from opencodr.config import OpenCoderConfig
+from opencodr.console import console
+from opencodr.display import (
     display_history,
     edit_msg,
     multiline_prompt,
@@ -39,8 +39,8 @@ from opencoder.display import (
     role_styles,
     rewind_cmd_rgx,
 )
-from opencoder.mcp_client import Server
-from opencoder.types import ToolCallError
+from opencodr.mcp_client import Server
+from opencodr.types import ToolCallError
 
 
 class Agent:
