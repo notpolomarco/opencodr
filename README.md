@@ -1,6 +1,6 @@
 <div align="center"  id="readme-top">
   <a>
-    <img src="images/logo.svg" alt="Logo" width="120" height="80">
+    <img src="https://raw.githubusercontent.com/notpolomarco/opencoder/main/images/logo.svg" alt="Logo" width="120" height="80">
   </a>
   <p align="center">
     Open source coding agent in your terminal
@@ -47,7 +47,7 @@
 ## About The Project
 
 <p align="">
-<img src="images/mascot.jpeg" alt="Product Name Screen Shot" width="250" height="250">
+<img src="https://github.com/notpolomarco/opencoder/raw/main/images/mascot.jpeg" alt="Product Name Screen Shot" width="250" height="250">
 </p>
 
 <div align="">
