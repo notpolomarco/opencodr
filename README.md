@@ -213,8 +213,8 @@ Prompt Overrides _(Optional)_
 ### Repo Setup
 
 ```bash
-git clone https://github.com/username/your-package.git
-cd your-package
+git clone https://github.com/notpolomarco/opencoder.git
+cd opencoder
 ```
 
 ### Create Virtual Environment
