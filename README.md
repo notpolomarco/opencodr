@@ -1,14 +1,14 @@
 <div align="center"  id="readme-top">
   <a>
-    <img src="https://raw.githubusercontent.com/notpolomarco/opencoder/main/images/logo.svg" alt="Logo" width="120" height="80">
+    <img src="https://raw.githubusercontent.com/notpolomarco/opencodr/main/images/logo.svg" alt="Logo" width="120" height="80">
   </a>
   <p align="center">
     Open source coding agent in your terminal
     <br />
     &middot;
-    <a href="https://github.com/notpolomarco/opencoder/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/notpolomarco/opencodr/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
-    <a href="https://github.com/notpolomarco/opencoder/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/notpolomarco/opencodr/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
@@ -46,12 +46,12 @@
 ## About The Project
 
 <p align="">
-<img src="https://github.com/notpolomarco/opencoder/raw/main/images/mascot.jpeg" alt="Product Name Screen Shot" width="250" height="250">
+<img src="https://github.com/notpolomarco/opencodr/raw/main/images/mascot.jpeg" alt="Product Name Screen Shot" width="250" height="250">
 </p>
 
 <div align="">
 
-`opencoder` is a simple recursive function combined with the [Function Calling API](https://docs.litellm.ai/docs/completion/function_call) + [Model Context Protocol](https://modelcontextprotocol.io/introduction) to create agentic behavior.
+`opencodr` is a simple recursive function combined with the [Function Calling API](https://docs.litellm.ai/docs/completion/function_call) + [Model Context Protocol](https://modelcontextprotocol.io/introduction) to create agentic behavior.
 
 - ❌ No Auth Screens
 - ❌ No Provider Lock-in
@@ -84,7 +84,7 @@ API Key(s) + A Terminal Is All You Need™️
 ### Installation
 
 ```
-> MacBookPro:example user$ pip install opencoder
+> MacBookPro:example user$ pip install opencodr
 ```
 
 ```
@@ -212,8 +212,8 @@ Prompt Overrides _(Optional)_
 ### Repo Setup
 
 ```bash
-git clone https://github.com/notpolomarco/opencoder.git
-cd opencoder
+git clone https://github.com/notpolomarco/opencodr.git
+cd opencodr
 ```
 
 ### Create Virtual Environment
@@ -231,10 +231,10 @@ pre-commit install
 pre-commit install --hook-type pre-push
 ```
 
-> _*NOTE*_: to test any new features in workspace mode, build the base image from `/opencoder/dockerfile.dev`
+> _*NOTE*_: to test any new features in workspace mode, build the base image from `/opencodr/dockerfile.dev`
 ```bash
 uv build
-docker build -t opencoder/base -f dockerfile.dev .
+docker build -t opencodr/base -f dockerfile.dev .
 ```
 
 
