@@ -17,6 +17,9 @@ OC_PATH = os.environ.get("OC_PATH", str(Path.cwd())).split(":")
 ALLOWED_GIT_CMDS = {"status", "log", "branch", "commit", "diff", "pull", "rev-parse"}
 
 
+mcp = FastMCP("FileEditor")
+
+
 def validate_path(path: str) -> str:
     """Ensure the requested path is within allowed directories."""
     abs_path = os.path.abspath(path)
@@ -25,12 +28,26 @@ def validate_path(path: str) -> str:
     return abs_path
 
 
-mcp = FastMCP("FileEditor")
+def safe_replace(file_path, old_text, new_text):
+    with open(file_path, "r") as f:
+        content = f.read()
+
+    count = content.count(old_text)
+    if count == 0:
+        raise ValueError("Error: No match found")
+    elif count > 1:
+        raise ValueError(f"Error: Found {count} matches")
+
+    new_content = content.replace(old_text, new_text)
+    with open(file_path, "w") as f:
+        f.write(new_content)
+
+    return "Successfully replaced text"
 
 
 @mcp.tool()
 async def read_file(path: str) -> str:
-    """Read a file and return its content with line numbers"""
+    """Read file content with line numbers"""
     try:
         validated_path = validate_path(path)
         result = subprocess.run(
@@ -44,38 +61,12 @@ async def read_file(path: str) -> str:
 
 
 @mcp.tool()
-async def edit_file(
-    path: str, start_line: int, new_text: str, end_line: Optional[int] = None
-) -> str:
-    """Edit a file using 'ed', given a start and end line."""
+async def str_replace_editor(path: str, old_str: str, new_str: str) -> str:
     try:
         validated_path = validate_path(path)
-
-        if end_line is None:
-            end_line = start_line
-
-        commands = [
-            f"{start_line},{end_line}d",  # Delete lines in the range [start_line, end_line]
-            f"{start_line}i",  # Insert new text starting at start_line
-            new_text,  # Insert the new text
-            ".",  # End of input to 'ed'
-            "w",  # Write changes to file
-            "q",  # Quit the editor
-        ]
-
-        result = subprocess.run(
-            ["ed", validated_path],
-            input="\n".join(commands),
-            capture_output=True,
-            text=True,
-        )
-
-        if result.returncode != 0:
-            return f"Error: {result.stderr}"
-
-        return await read_file(path=validated_path)
+        return safe_replace(validated_path, old_str, new_str)
     except Exception as e:
-        return f"Error: {str(e)}"
+        return f"Error:\n{str(e)}"
 
 
 @mcp.tool()
